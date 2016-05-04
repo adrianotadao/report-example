@@ -6,6 +6,10 @@ module SkoreAPI
       @access_token = access_token
     end
 
+    def access
+      SkoreAPI::Access.new(@access_token)
+    end
+
     def board
       SkoreAPI::Board.new(@access_token)
     end
@@ -22,6 +26,10 @@ module SkoreAPI
       SkoreAPI::Lesson.new(@access_token)
     end
 
-    memoize :board, :category, :enrollment, :lesson
+    def user
+      SkoreAPI::User.new(@access_token)
+    end
+
+    memoize :access, :board, :category, :enrollment, :lesson, :user
   end
 end

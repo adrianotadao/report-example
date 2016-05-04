@@ -1,6 +1,7 @@
 module SkoreAPI
   autoload :Base, './lib/skore_api/base'
 
+  autoload :Access, './lib/skore_api/access'
   autoload :Board, './lib/skore_api/board'
   autoload :Category, './lib/skore_api/category'
   autoload :Enrollment, './lib/skore_api/enrollment'

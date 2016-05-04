@@ -19,20 +19,31 @@ class Report::Item
   end
 
   def grade
-    @enrollment.grade
+    @enrollment.grade.to_f.round(1)
   end
 
   def progress
-    @enrollment.progress
-  end
-
-  def last_access
-    # api not ready
+    @enrollment.progress.to_i
   end
 
   def completed_lessons
     query = { category_id: category.id, completed_by: user.id, only: %w(id) }
     client.lesson.index(query: query).parsed_response.try(:size).to_i
+  end
+
+  def last_access
+    return if accesses.blank?
+    accesses.first.try(:created_at)
+  end
+
+  def duration
+    return if accesses.blank?
+    accesses.map { |access| access.lesson.duration.to_i }.sum
+  end
+
+  def access_count
+    return 0 if accesses.blank?
+    accesses.size.to_i
   end
 
   def to_a
@@ -42,7 +53,10 @@ class Report::Item
       started_at,
       grade,
       progress,
-      completed_lessons
+      completed_lessons,
+      last_access,
+      duration,
+      access_count
     ]
   end
 
@@ -60,5 +74,16 @@ class Report::Item
     @enrollment.category
   end
 
-  memoize :client, :completed_lessons
+  def accesses
+    query = {
+      by_categories: category.id,
+      user_id: user.id,
+      recent: true,
+      only: %w(created_at lesson.duration)
+    }
+    client.access.index(query: query).parsed_response
+  end
+
+  memoize :client, :user, :category, :accesses, :completed_lessons,
+          :last_access, :duration, :access_count
 end
