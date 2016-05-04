@@ -1,0 +1,40 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (4.2.6)
+      i18n (~> 0.7)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.3, >= 0.3.4)
+      tzinfo (~> 1.1)
+    byebug (8.2.5)
+    dotenv (2.1.1)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
+    i18n (0.7.0)
+    json (1.8.3)
+    memoist (0.14.0)
+    minitest (5.8.4)
+    multi_xml (0.5.5)
+    rake (11.1.2)
+    thread_safe (0.3.5)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activesupport (= 4.2.6)
+  byebug (= 8.2.5)
+  dotenv (= 2.1.1)
+  httparty (= 0.13.7)
+  memoist (= 0.14.0)
+  rake (= 11.1.2)
+
+RUBY VERSION
+   ruby 2.3.1p112
+
+BUNDLED WITH
+   1.12.1
