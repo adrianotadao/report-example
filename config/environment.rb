@@ -2,8 +2,9 @@ Bundler.require(:default)
 require 'dotenv'
 require 'httparty'
 require 'memoist'
-require 'byebug'
 require 'active_support/all'
+require 'csv'
+require 'byebug'
 
 Dotenv.load
 require File.expand_path('../../lib/open_struct_parser', __FILE__)
