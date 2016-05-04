@@ -6,7 +6,7 @@ class Report
   def run!
     CSV.open(REPORT_PATH, 'w+') do |csv|
       csv << headers
-      items.first(10).each { |item| csv << item.to_a }
+      items.each { |item| csv << item.to_a }
     end
   end
 
@@ -30,10 +30,7 @@ class Report
   end
 
   def enrollments
-    query = {
-      only: %w(category_id user_id grade progress created_at),
-      limit: 10
-    }
+    query = { only: %w(category_id user_id grade progress created_at) }
     client.enrollment.index(query: query).parsed_response['enrollments']
   end
 
