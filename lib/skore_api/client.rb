@@ -18,6 +18,10 @@ module SkoreAPI
       SkoreAPI::Category.new(@access_token)
     end
 
+    def department
+      SkoreAPI::Department.new(@access_token)
+    end
+
     def enrollment
       SkoreAPI::Enrollment.new(@access_token)
     end
@@ -30,6 +34,10 @@ module SkoreAPI
       SkoreAPI::User.new(@access_token)
     end
 
-    memoize :access, :board, :category, :enrollment, :lesson, :user
+    def worksheet
+      SkoreAPI::Worksheet.new(@access_token)
+    end
+
+    memoize :access, :board, :category, :department, :enrollment, :lesson, :user, :worksheet
   end
 end

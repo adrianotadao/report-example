@@ -6,7 +6,8 @@ require 'active_support/all'
 require 'csv'
 require 'byebug'
 
+ROOT = File.expand_path('../../', __FILE__)
 Dotenv.load
-require File.expand_path('../../lib/open_struct_parser', __FILE__)
-require File.expand_path('../../lib/skore_api', __FILE__)
-require File.expand_path('../../lib/report', __FILE__)
+require "#{ ROOT }/lib/open_struct_parser"
+require "#{ ROOT }/lib/skore_api"
+require "#{ ROOT }/lib/reports"
