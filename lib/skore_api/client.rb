@@ -2,40 +2,36 @@ module SkoreAPI
   class Client
     extend Memoist
 
-    def initialize(access_token = ENV['SKORE_TOKEN'])
-      @access_token = access_token
-    end
-
     def access
-      SkoreAPI::Access.new(@access_token)
+      SkoreAPI::Access.new
     end
 
     def board
-      SkoreAPI::Board.new(@access_token)
+      SkoreAPI::Board.new
     end
 
     def category
-      SkoreAPI::Category.new(@access_token)
+      SkoreAPI::Category.new
     end
 
     def department
-      SkoreAPI::Department.new(@access_token)
+      SkoreAPI::Department.new
     end
 
     def enrollment
-      SkoreAPI::Enrollment.new(@access_token)
+      SkoreAPI::Enrollment.new
     end
 
     def lesson
-      SkoreAPI::Lesson.new(@access_token)
+      SkoreAPI::Lesson.new
     end
 
     def user
-      SkoreAPI::User.new(@access_token)
+      SkoreAPI::User.new
     end
 
     def worksheet
-      SkoreAPI::Worksheet.new(@access_token)
+      SkoreAPI::Worksheet.new
     end
 
     memoize :access, :board, :category, :department, :enrollment, :lesson, :user, :worksheet

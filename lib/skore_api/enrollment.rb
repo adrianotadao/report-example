@@ -1,7 +1,7 @@
 module SkoreAPI
-  class Enrollment < Base
+  class Enrollment
     def index(options = {})
-      self.class.get('/enrollments', options)
+      SkoreAPI::Operations::Index.all('/enrollments', options)
     end
   end
 end

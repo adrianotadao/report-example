@@ -1,7 +1,7 @@
 module SkoreAPI
-  class User < Base
+  class User
     def index(options = {})
-      self.class.get('/users', options)
+      SkoreAPI::Operations::Index.all('/users', options)
     end
   end
 end

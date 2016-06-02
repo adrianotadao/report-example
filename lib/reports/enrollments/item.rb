@@ -30,7 +30,7 @@ module Reports
 
       def completed_lessons
         query = { category_id: category.id, completed_by: user.id, only: %w(id) }
-        client.lesson.index(query: query).parsed_response.try(:size).to_i
+        client.lesson.index(query: query).try(:size).to_i
       end
 
       def last_access
@@ -83,7 +83,7 @@ module Reports
           recent: true,
           only: %w(created_at lesson.duration)
         }
-        client.access.index(query: query).parsed_response
+        client.access.index(query: query)
       end
 
       memoize :client, :user, :category, :accesses, :completed_lessons,

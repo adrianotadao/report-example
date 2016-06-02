@@ -19,7 +19,7 @@ module Reports
 
       def users
         query = { only: %w(id name email) }
-        client.user.index(query: query).parsed_response
+        client.user.index(query: query)
       end
 
       def items

@@ -1,4 +1,14 @@
 namespace :reports do
+  desc 'Accesses Report'
+  task :accesses do
+    Reports::Accesses::Report.new.run!
+  end
+
+  desc 'Departments Report'
+  task :departments do
+    Reports::Departments::Report.new.run!
+  end
+
   desc 'Enrollments Report'
   task :enrollments do
     Reports::Enrollments::Report.new.run!
@@ -9,9 +19,9 @@ namespace :reports do
     Reports::Users::Report.new.run!
   end
 
-  desc 'Departments Report'
-  task :departments do
-    Reports::Departments::Report.new.run!
+  desc 'User Departmetns Report'
+  task :user_departments do
+    Reports::UserDepartments::Report.new.run!
   end
 
   desc 'Worksheets Report'

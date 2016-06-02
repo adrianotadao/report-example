@@ -1,7 +1,7 @@
 module SkoreAPI
-  class Worksheet < Base
+  class Worksheet
     def index(options = {})
-      self.class.get('/worksheets', options)
+      SkoreAPI::Operations::Index.all('/worksheets', options)
     end
   end
 end

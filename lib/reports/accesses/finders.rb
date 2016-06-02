@@ -1,19 +1,19 @@
 module Reports
-  module Worksheets
+  module Accesses
     class Finders
       class << self
         extend Memoist
 
-        def find_user(worksheet)
-          users.find { |user| user.id == worksheet.student_id }
+        def find_user(access)
+          users.detect { |user| user.id == access.user_id }
         end
 
         def find_departments(user)
-          departments.find_all { |department| department.user_ids.include?(user.id) }
+          departments.select { |department| department.user_ids.include?(user.id) }
         end
 
-        def find_lesson(worksheet)
-          lessons.find { |lesson| lesson.id == worksheet.lesson_id }
+        def find_lesson(access)
+          lessons.detect { |lesson| lesson.id == access.lesson_id }
         end
 
         private
@@ -29,7 +29,7 @@ module Reports
         end
 
         def lessons
-          query = { only: %i(id title board.name category.name) }
+          query = { only: %i(id title board.name category.name category.template) }
           client.lesson.index(query: query)
         end
 

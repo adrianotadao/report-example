@@ -7,9 +7,7 @@ module Reports
       def run!
         CSV.open(REPORT_PATH, 'w+') do |csv|
           csv << headers
-          items.each do |item|
-            item.to_a.each { |r| csv << r }
-          end
+          items.to_a.each { |item| csv << item.to_a }
         end
       end
 
@@ -20,12 +18,23 @@ module Reports
       end
 
       def worksheets
-        query = { evaluated: true, only: %w(lesson_id student_id grade memorized_answers) }
-        client.worksheet.index(query: query).parsed_response
+        query = {
+          evaluated: true,
+          only: %w(lesson_id student_id grade memorized_answers),
+          per_page: 1_000
+        }
+        client.worksheet.index(query: query)
       end
 
       def items
-        worksheets.map { |worksheet| Reports::Worksheets::Item.new(worksheet) }
+        return if worksheets.blank?
+        Array.new.tap do |items|
+          worksheets.each do |worksheet|
+            item = Reports::Worksheets::Item.new(worksheet)
+            next if item.to_a.blank?
+            items.concat(item.to_a)
+          end
+        end.compact.uniq
       end
 
       def headers

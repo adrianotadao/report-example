@@ -19,7 +19,7 @@ module Reports
 
       def departments
         query = { only: %w(id name total_users) }
-        client.department.index(query: query).parsed_response
+        client.department.index(query: query)
       end
 
       def items

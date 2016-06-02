@@ -4,7 +4,9 @@
 Set your access token on `.env` file
 
 ### Reports
-1. Users `bundle exec rake reports:users`
-2. Departments `bundle exec rake reports:departments`
-3. Worksheets `bundle exec rake reports:worksheets`
-4. Enrollments `bundle exec rake reports:enrollments`
+- Accesses `bundle exec rake reports:accesses`
+- Departments `bundle exec rake reports:departments`
+- Enrollments `bundle exec rake reports:enrollments`
+- Users `bundle exec rake reports:users`
+- User Departments `bundle exec rake reports:user_departments`
+- Worksheets `bundle exec rake reports:worksheets`

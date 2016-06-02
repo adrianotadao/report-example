@@ -1,7 +1,7 @@
 module SkoreAPI
-  class Department < Base
+  class Department
     def index(options = {})
-      self.class.get('/departments', options)
+      SkoreAPI::Operations::Index.all('/departments', options)
     end
   end
 end

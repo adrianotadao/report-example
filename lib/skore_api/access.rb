@@ -1,7 +1,7 @@
 module SkoreAPI
-  class Access < Base
+  class Access
     def index(options = {})
-      self.class.get('/accesses', options)
+      SkoreAPI::Operations::Index.all('/accesses', options)
     end
   end
 end

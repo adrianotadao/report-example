@@ -20,6 +20,7 @@ module Reports
       end
 
       def to_a
+        return if @worksheet.memorized_answers.blank?
         @worksheet.memorized_answers.map do |memorized_answer|
           build_memorized_answer(memorized_answer)
         end
