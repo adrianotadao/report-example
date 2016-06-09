@@ -4,6 +4,7 @@ require 'httparty'
 require 'memoist'
 require 'active_support/all'
 require 'csv'
+require 'thread/pool'
 require 'byebug'
 
 ROOT = File.expand_path('../../', __FILE__)

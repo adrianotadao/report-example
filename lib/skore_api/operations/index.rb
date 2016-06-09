@@ -5,7 +5,7 @@ module SkoreAPI
 
       class << self
         def run(path, options = {})
-          response = get(path, options)
+          response = request(:get, path, options)
           SkoreAPI::Request::Collection.new(response)
         end
 

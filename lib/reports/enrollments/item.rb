@@ -2,30 +2,22 @@ module Reports
   module Enrollments
     class Item
       extend Memoist
-      attr_reader :category_name, :user_name, :started_at, :last_access
+      attr_reader :enrollment
 
       def initialize(enrollment)
         @enrollment = enrollment
       end
 
-      def category_name
-        category.name
-      end
-
-      def user_name
-        user.name
-      end
-
       def started_at
-        @enrollment.created_at
+        enrollment.created_at
       end
 
       def grade
-        @enrollment.grade.to_f.round(1)
+        enrollment.grade.to_f.round(1)
       end
 
       def progress
-        @enrollment.progress.to_i
+        enrollment.progress.to_i
       end
 
       def completed_lessons
@@ -40,7 +32,11 @@ module Reports
 
       def duration
         return if accesses.blank?
-        accesses.map { |access| access.lesson.duration.to_i }.sum
+        accesses.map do |access|
+          lesson = Reports::Enrollments::Finders.find_lesson(access.lesson_id)
+          next unless lesson.duration
+          lesson.duration.to_i
+        end.sum
       end
 
       def access_count
@@ -49,9 +45,10 @@ module Reports
       end
 
       def to_a
+        return if category.blank? || user.blank?
         [
-          category_name,
-          user_name,
+          category.name,
+          user.name,
           started_at,
           grade,
           progress,
@@ -69,21 +66,15 @@ module Reports
       end
 
       def user
-        @enrollment.user
+        Reports::Enrollments::Finders.find_user(enrollment.user_id)
       end
 
       def category
-        @enrollment.category
+        Reports::Enrollments::Finders.find_category(enrollment.category_id)
       end
 
       def accesses
-        query = {
-          by_categories: category.id,
-          user_id: user.id,
-          recent: true,
-          only: %w(created_at lesson.duration)
-        }
-        client.access.index(query: query)
+        Reports::Enrollments::Finders.find_accesses(category.id, user.id)
       end
 
       memoize :client, :user, :category, :accesses, :completed_lessons,

@@ -18,7 +18,7 @@ module Reports
       end
 
       def accesses
-        query = { only: %w(created_at lesson_id user_id), per_page: 1_000, limit: 2000 }
+        query = { only: %w(created_at lesson_id user_id), per_page: 1_000 }
         client.access.index(query: query)
       end
 
