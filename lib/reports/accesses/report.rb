@@ -7,7 +7,10 @@ module Reports
       def run!
         CSV.open(REPORT_PATH, 'w+') do |csv|
           csv << headers
-          items.each { |item| csv << item.to_a }
+          items.each do |item|
+            row = item.to_a
+            csv << row if row.present?
+          end
         end
       end
 

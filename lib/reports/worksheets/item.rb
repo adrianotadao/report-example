@@ -27,6 +27,7 @@ module Reports
       end
 
       def build_memorized_answer(memorized_answer)
+        return if user.blank?
         [
           departments.map(&:name).join(' | '),
           user.name,

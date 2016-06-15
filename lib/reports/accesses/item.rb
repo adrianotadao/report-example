@@ -21,6 +21,7 @@ module Reports
       end
 
       def to_a
+        return if user.blank?
         created_at = Date.parse(access.created_at)
         [
           access.created_at,

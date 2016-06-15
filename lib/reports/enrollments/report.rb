@@ -51,8 +51,7 @@ module Reports
 
       def proccess_item(item)
         row = item.to_a
-        return if row.blank?
-        csv << row
+        csv << row if row.present?
       end
 
       def headers
